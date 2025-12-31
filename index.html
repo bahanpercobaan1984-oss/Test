@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pelacak Nomor HP Indonesia - Cek Operator & Lokasi">
+    <title>PhoneTracker ID - Lacak Nomor HP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>PhoneTracker<span class="id">.ID</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#tracker"><i class="fas fa-search"></i> Lacak</a></li>
+                <li><a href="#operator"><i class="fas fa-sim-card"></i> Operator</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> Tentang</a></li>
+            </ul>
+            <button class="menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-satellite-dish"></i> Lacak Informasi Nomor HP</h1>
+            <p class="subtitle">Cek operator, lokasi, dan status nomor telepon Indonesia secara gratis</p>
+            <div class="cta-buttons">
+                <a href="#tracker" class="btn-primary">
+                    <i class="fas fa-bolt"></i> Lacak Sekarang
+                </a>
+                <a href="#howto" class="btn-secondary">
+                    <i class="fas fa-question-circle"></i> Cara Pakai
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/3059/3059520.png" alt="Phone Tracking">
+        </div>
+    </section>
+
+    <!-- Tracker Section -->
+    <section id="tracker" class="tracker-section">
+        <div class="container">
+            <h2><i class="fas fa-search-location"></i> Lacak Nomor HP</h2>
+            <p class="section-subtitle">Masukkan nomor HP dengan kode negara (+62)</p>
+            
+            <div class="tracker-box">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <input type="tel" 
+                           id="phoneInput" 
+                           placeholder="Contoh: +628123456789"
+                           pattern="\+[0-9]{10,15}"
+                           maxlength="20"
+                           required>
+                    <div class="country-code">
+                        <span id="countryFlag">🇮🇩</span>
+                        <span>+62</span>
+                    </div>
+                </div>
+                
+                <div class="tracker-actions">
+                    <button onclick="trackNumber()" class="track-btn" id="trackBtn">
+                        <i class="fas fa-search"></i> Lacak Nomor
+                    </button>
+                    <button onclick="clearInput()" class="clear-btn">
+                        <i class="fas fa-times"></i> Hapus
+                    </button>
+                </div>
+                
+                <div class="quick-numbers">
+                    <span>Contoh cepat:</span>
+                    <button class="quick-btn" onclick="setExample('+628123456789')">+628123456789</button>
+                    <button class="quick-btn" onclick="setExample('+628561234567')">+628561234567</button>
+                    <button class="quick-btn" onclick="setExample('+628781234567')">+628781234567</button>
+                </div>
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Melacak nomor...</p>
+            </div>
+            
+            <!-- Results -->
+            <div class="result-container" id="resultContainer">
+                <div class="result-header">
+                    <h3><i class="fas fa-file-alt"></i> Hasil Pelacakan</h3>
+                    <button onclick="saveResult()" class="save-btn">
+                        <i class="fas fa-download"></i> Simpan
+                    </button>
+                </div>
+                <div class="result-grid" id="resultGrid">
+                    <!-- Hasil akan muncul di sini -->
+                </div>
+            </div>
+            
+            <!-- Error -->
+            <div class="error-box" id="errorBox">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="errorText"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Operator Database -->
+    <section id="operator" class="operator-section">
+        <div class="container">
+            <h2><i class="fas fa-database"></i> Database Operator Indonesia</h2>
+            <div class="operator-grid" id="operatorGrid">
+                <!-- Operator list akan diisi JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How To -->
+    <section id="howto" class="howto-section">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Cara Menggunakan</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-edit"></i>
+                    <h3>Masukkan Nomor</h3>
+                    <p>Ketik nomor dengan format +62xxxxxxxxxxx</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-search"></i>
+                    <h3>Klik Lacak</h3>
+                    <p>Sistem akan memproses dan mencari informasi</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Lihat Hasil</h3>
+                    <p>Informasi operator dan lokasi akan ditampilkan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>PhoneTracker<span class="id">.ID</span></span>
+                </div>
+                <p class="footer-text">
+                    Tools pelacakan nomor HP Indonesia. Data bersifat publik dan estimasi.
+                </p>
+                <div class="footer-links">
+                    <a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    <a href="#terms"><i class="fas fa-file-contract"></i> Terms</a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+                <p class="copyright">
+                    © 2024 PhoneTracker.ID | Update terakhir: <span id="currentDate"></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID');
+    </script>
+</body>
+</html>
